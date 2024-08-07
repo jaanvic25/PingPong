@@ -41,22 +41,22 @@ module ball_movement (
             // If there is no collision, move the ball normally for each clock pulse.
             else begin
                 // Right
-                if (right) begin
+                if (bx_vel > 0) begin
                     bx <= bx + bx_vel;
                 end
 
                 // Left
-                else if (left) begin
+                else if (bx_vel < 0) begin
                     bx <= bx - bx_vel;
                 end
 
                 // Up
-                else if (up) begin
+                else if (by_vel > 0) begin
                     by <= by + by_vel;
                 end
 
                 // Down
-                else if (down) begin
+                else if (by_vel < 0) begin
                     by <= by - by_vel;
                 end
             end
