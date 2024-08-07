@@ -1,5 +1,5 @@
 module led(
-    input 
+    input enc1a, enc1b, enc2a, enc2b, //encoders
     input bx, by // ball x, y
     input p1y, p2y //top of paddle 1, 2
     input sc1, sc2 //score 1, 2
@@ -39,9 +39,9 @@ module led(
 
     //keeping paddles within bounds 
     always @ (p1y) begin
-        if p1y > 58
+        if (p1y > 58)
             p1y = 58;
-        else if p1y < 5
+        else (if p1y < 5)
             p1y = 5;
     end
 
@@ -65,6 +65,30 @@ module led(
         matrix[sc2x:sc2x+2][row] = nums[sc2][row];
     end
 
-    //draw mid point line
+    //display the middle line
+    for(i=0; i<22; i=i+3) begin
+        matrix[midpt][i:i+1] = 1;
+        matrix[midpt][i+2] = 0;
+    end
+
+    always @(posedge enc1a) begin
+        if (enc1b ==0)
+            //paddle1 up
+    end
+
+    always @(posedge enc1b) begin
+        if (enc1a ==0)
+            //paddle1 down
+    end
+
+    always @(posedge enc2a) begin
+        if (enc2b ==0)
+            //paddle2 up
+    end
+
+    always @(posedge enc2b) begin
+        if (enc2a ==0)
+            //paddle2 down
+    end
 
 endmodule

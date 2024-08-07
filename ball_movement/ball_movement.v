@@ -1,28 +1,65 @@
+// #include collision_detection
+
 module ball_movement (
-    input clk, reset, paddle_collision, ball_collision
-    parameter bx, by, bx_vel, by_vel, theta
-    output bx_dir, by_dir
+    parameter bx, by <= 31
+)(
+    input clk, reset, paddle_collision, wall_collision, rotate, theta_i,
+    output bx_dir, by_dir, x_o, y_o
 );
+    localparam bx_vel, by_vel;
 
     always @(posedge clk) begin
         // If the game has just begun, the ball is at center and randomly served.
         by <= 31;
         bx <= 31;
 
-        theta = $random_range(-45, 45);
-        if (theta == 0) begin
-            theta <= 1;
-        end
-        
-        bx_vel <= 2 * ; // COME BACK: use trial and error to find best x velocity.
-        by_vel <= $random_range(1, 3);
+        // Select rotate for fixed-point calculations.
+        rotate = 1;
 
+        // Calculate a non-zero angle for theta to use for the ball's velocity vectors.
+        theta_i <= $random_range(-45, 45);
+        if (theta_i == 0) begin
+            theta_i <= 1;
+        end
+
+        x_o <= cos(theta_i);
+        y_o <= sin(theta_i);
+        
+        bx_vel <= 2 * x_o; // COME BACK: use trial and error to find best scale value for velocity.
+        by_vel <= 2 * y_o;
+
+        // Position of the ball after the Pong game.
         else begin
-            // Otherwise, ball position depends on collisions.
             if (paddle_collision) begin
-                bx_vel <= -bx_vel; // COME BACK: try using CORDIC or trig.
+                bx_vel <= -bx_vel;
+            end
+
+            else if (wall_collision) begin
+                by_vel <= -by_vel;
+            end
+
+            // If there is no collision, move the ball normally for each clock pulse.
+            else begin
+                // Right
+                if (right) begin
+                    bx <= bx + bx_vel;
+                end
+
+                // Left
+                else if (left) begin
+                    bx <= bx - bx_vel;
+                end
+
+                // Up
+                else if (up) begin
+                    by <= by + by_vel;
+                end
+
+                // Down
+                else if (down) begin
+                    by <= by - by_vel;
+                end
             end
         end
     end
-
 endmodule
