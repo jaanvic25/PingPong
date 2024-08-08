@@ -1,6 +1,6 @@
 `include "paddle_movement.v";
 `include "ball_movement.v";
-`include "game.v";
+`include "top.v"
 
 module led(
     input bx, by // ball x, y
