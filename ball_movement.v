@@ -1,32 +1,34 @@
-// #include collision_detection
+`include "collision_detection.v"
 
 module ball_movement (
     parameter bx, by <= 31
 )(
     input clk, reset, paddle_collision, wall_collision, rotate, theta_i,
-    output bx_dir, by_dir, x_o, y_o
+    output bx_dir, by_dir, x_o, y_o, bx, by
 );
     localparam bx_vel, by_vel;
 
     always @(posedge clk) begin
         // If the game has just begun, the ball is at center and randomly served.
-        by <= 31;
-        bx <= 31;
+        if (reset) begin
+            by <= 31;
+            bx <= 31;
 
-        // Select rotate for fixed-point calculations.
-        rotate = 1;
+            // Select rotate for fixed-point calculations.
+            rotate = 1;
 
-        // Calculate a non-zero angle for theta to use for the ball's velocity vectors.
-        theta_i <= $random_range(-45, 45);
-        if (theta_i == 0) begin
-            theta_i <= 1;
+            // Calculate a non-zero angle for theta to use for the ball's velocity vectors.
+            theta_i <= $random_range(-45, 45);
+            if (theta_i == 0) begin
+                theta_i <= 1;
+            end
+
+            x_o <= cos(theta_i);
+            y_o <= sin(theta_i);
+            
+            bx_vel <= 2 * x_o; // COME BACK: use trial and error to find best scale value for velocity.
+            by_vel <= 2 * y_o;
         end
-
-        x_o <= cos(theta_i);
-        y_o <= sin(theta_i);
-        
-        bx_vel <= 2 * x_o; // COME BACK: use trial and error to find best scale value for velocity.
-        by_vel <= 2 * y_o;
 
         // Position of the ball after the Pong game.
         else begin
