@@ -9,7 +9,7 @@ module paddle_movement (
     end
 
     always @(posedge enc1a) begin
-        if (enc1b ==0) begin
+        if (enc1b == 0) begin
             p1y <= p1y + 1;
         end
     end

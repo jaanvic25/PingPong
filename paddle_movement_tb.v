@@ -29,15 +29,15 @@ module paddle_movement_tb;
     // Generate stimulus
     initial begin
         // Test 1
-        $display("Test 1: left paddle move up"); #1
+        $display("Test 1: left paddle move up, left paddle y = %b", p1y); #1
         enc1a, enc1b = 0; #5
         enc1a = 1; #5
         enc1b = 1; #5
         enc1a = 0; #5
         enc1b = 0; #5
-        
+       
         // Test 2
-        $display("Test 2: right paddle move up"); #0.5
+        $display("Test 2: right paddle move up, right paddle y = %b", p2y); #0.5
         enc2a, enc2b = 0; #5
         enc2a = 1; #5
         enc2b = 1; #5
@@ -45,7 +45,7 @@ module paddle_movement_tb;
         enc2b = 0; #5
         
         // Test 3
-        $display("Test 3: left paddle move down"); #0.5
+        $display("Test 3: left paddle move down, left paddle y = %b", p1y); #0.5
         enc1a, enc1b = 0; #5
         enc1b = 1; #5
         enc1a = 1; #5
@@ -53,7 +53,7 @@ module paddle_movement_tb;
         enc1a = 0; #5
         
         // Test 4
-        $display("Test 4: right paddle move down"); #0.5
+        $display("Test 4: right paddle move down, right paddle y = %b", p2y); #0.5
         enc2a, enc2b = 0; #5
         enc2b = 1; #5
         enc2a = 1; #5
