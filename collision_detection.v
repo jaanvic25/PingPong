@@ -1,3 +1,4 @@
+`include "top.v"
 `include "ball_movement.v"
 `include "paddle_movement.v"
 

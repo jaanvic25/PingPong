@@ -1,24 +1,39 @@
 `include "collision_detection.v"
+`include "top.v"
 
 module ball_movement (
-    parameter bx, by <= 31
+    parameter bx, by <= 31,
+    parameter theta_i, rotate
 )(
-    input clk, reset, paddle_collision, wall_collision, rotate, theta_i,
+    input clk, reset, paddle_collision, wall_collision counter,
     output bx_dir, by_dir, x_o, y_o, bx, by
 );
     localparam bx_vel, by_vel;
+
+    function random_angle;
+        parameter temp;
+        always @(sc1, sc2, posedge clk) begin
+            temp <= sys_clk;
+            theta_i <= counter;
+        end
+    endfunction
 
     always @(posedge clk) begin
         // If the game has just begun, the ball is at center and randomly served.
         if (reset) begin
             by <= 31;
             bx <= 31;
+        end
+        always @(sc1 or sc2)begin
+            by <= 31;
+            bx <= 31;
+        end 
 
             // Select rotate for fixed-point calculations.
             rotate = 1;
 
             // Calculate a non-zero angle for theta to use for the ball's velocity vectors.
-            theta_i <= $random_range(-45, 45);
+            theta_i <= clk;
             if (theta_i == 0) begin
                 theta_i <= 1;
             end
@@ -63,5 +78,5 @@ module ball_movement (
                 end
             end
         end
-    end
+    
 endmodule

@@ -2,8 +2,8 @@ module paddle_movement (
     parameter p1y, p2y <= 28;
     input enc1a, enc1b, enc2a, enc2b, //encoders
     output p1y, p2y //top of paddle 1, 2
-);
-    always @(reset_game) begin
+)
+    always @(reset_game or sc1 or sc2) begin
         p1y, p2y <=28
     end
     always @(posedge enc1a) begin
