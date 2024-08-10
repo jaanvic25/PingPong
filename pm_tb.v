@@ -39,7 +39,7 @@ module paddle_movement_tb;
     // Generate stimulus
     initial begin
         reset_game = 0;
-       // Test 1
+        // Test 1
         $display("Test 1: left paddle move up, left paddle y = %b", p1y); #1
         enc1a = 0;
         enc1b = 0; #5
