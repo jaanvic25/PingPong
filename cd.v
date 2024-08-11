@@ -4,7 +4,7 @@
 
 module collision_detection (
     input bx, by, p1y, p2y,
-    input sc1, sc2,
+    input reg sc1, sc2,
     output reg paddle_collision,
     output reg wall_collision,
     output sc1, sc2

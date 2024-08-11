@@ -12,8 +12,8 @@ module ball_movement_tb;
     reg by_dir;
     wire x_o;
     wire y_o;
-    wire bx;
-    wire by;
+    reg bx;
+    reg by;
 
     // Connect inputs to hardware
     ball_movement uut (
@@ -45,7 +45,7 @@ module ball_movement_tb;
         y-velocity = %b, x-position = %b, y-position = %b", bx_dir, by_dir, bx, by);
         paddle_collision = 1;
         wall_collision = 0; #5
-        counter = 0; #5
+        counter = 0; #5 // COME BACK: not an input??
 
         $display("Ball movement testbench completed.")
         $stop;
