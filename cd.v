@@ -5,8 +5,8 @@
 module collision_detection (
     input [5:0] bx,
     input [5:0] by,
-    input wire [5:0] p1y,
-    input wire [5:0] p2y,
+    input [5:0] p1y,
+    input [5:0] p2y,
     output reg [1:0] paddle_collision,
     output reg wall_collision,
     output reg [2:0] sc1,
@@ -55,7 +55,7 @@ module collision_detection (
             sc2 = sc2 + 1;
         end
 
-        // Player 2 scores 
+        // Player 2 scores
         else if (bx == 61 && (by < p2y || by > (p2y + 5))) begin
             sc1 = sc1+ 1;
         end
