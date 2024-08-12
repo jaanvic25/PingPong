@@ -44,9 +44,8 @@ module paddle_movement_tb;
     // Generate stimulus
     initial begin
         reset_game = 1; #50
-    
+   
         // Test 1
-      //  $display("Test 1: left paddle move up, left paddle y = %d", p1y); #0.5
         enc1a = 0;
         enc1b = 0; #5
         enc1a = 1; #5
@@ -56,14 +55,12 @@ module paddle_movement_tb;
         $display("Test 1: left paddle move up, left paddle y = %d", p1y); #0.5
 
         // Test 2
-        
         enc2a = 0;
         enc2b = 0; #5
         enc2a = 1; #5
         enc2b = 1; #5
         enc2a = 0; #5
         enc2b = 0; #5
-
         $display("Test 2: right paddle move up, right paddle y = %d", p2y); #2
 
         // Test 3
@@ -74,34 +71,15 @@ module paddle_movement_tb;
         enc1b = 0; #5
         enc1a = 0; #5
         $display("Test 3: left paddle move down, left paddle y = %d", p1y); #0.5
-        
+       
         // Test 4
-        
         enc2a = 0; 
         enc2b = 0; #5
         enc2b = 1; #5
         enc2a = 1; #5
         enc2b = 0; #5
         enc2a = 0; #5
-
         $display("Test 4: right paddle move down, right paddle y = %d", p2y); #2
-
-        // $display("Test 1: left paddle move up, left paddle y = %d", p1y); #2
-        // enc1a = 0;
-        // enc1b = 0; #5
-        // enc1a = 1; #5
-        // enc1b = 0; #5
-        // enc1a = 0; #5
-        // enc1b = 0; #5
-
-        // // Test 2
-        // $display("Test 2: right paddle move up, right paddle y = %d", p2y); #0.5
-        // enc2a = 0; 
-        // enc2b = 0; #5
-        // enc2a = 1; #5
-        // enc2b = 1; #5
-        // enc2a = 0; #5
-        // enc2b = 0; #5
 
         $display("Paddle movement testbench completed."); #5
         $stop;

@@ -1,11 +1,15 @@
-`include "collision_detection.v"
+`include "cd.v"
 `include "top.v"
 
 module ball_movement (
     parameter bx, by <= 31,
     parameter theta_i, rotate
 )(
-    input clk, reset, paddle_collision, wall_collision, counter,
+    //input clk,
+    input reset,
+    input paddle_collision,
+    input wall_collision,
+    input counter,
     output bx_dir, by_dir, x_o, y_o, bx, by
 );
     localparam bx_vel, by_vel;

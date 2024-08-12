@@ -2,28 +2,29 @@
 
 module ball_movement_tb;
     // Inputs
-    // COME BACK: bm.v has clk and reset as inputs, but can you create them within in the tb??
-    wire paddle_collision;
-    wire wall_collision;
+    reg paddle_collision;
+    reg wall_collision;
     reg counter;
 
     // Outputs
-    reg bx_dir; // COME BACK: should this be reg or wire??
-    reg by_dir;
+    wire bx_dir; // COME BACK: should this be reg or wire??
+    wire by_dir;
     wire x_o;
     wire y_o;
+    wire reset;
     reg bx;
     reg by;
 
     // Connect inputs to hardware
     ball_movement uut (
-        .clk(clk),
+        //.clk(clk),
         .reset(reset),
         .paddle_collision(paddle_collision),
         .wall_collision(wall_collision),
         .counter(counter)
     );
 
+    /*
     // Generate clock
     initial begin
         clk = 1'b0;
@@ -36,6 +37,7 @@ module ball_movement_tb;
         #10
         reset = 1'b0;
     end
+    */
 
     // Generate stimulus
     // COME BACK: this is so wrong lmao i'm only going to both writing one test
