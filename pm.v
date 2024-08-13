@@ -43,4 +43,26 @@ module paddle_movement  (
             p2y <= p2y - 1;
         end
     end
+
+        // Keep paddles within bounds 
+    always @(p1y) begin
+        if (p1y > 58) begin
+            p1y <= 6'd58;
+        end
+
+        else if (p1y < 5) begin
+            p1y <= 6'd5;
+        end
+    end
+
+    always @(p2y) begin
+        if (p2y > 58) begin
+            p2y <= 6'd58;
+        end
+
+        else if (p2y < 5) begin
+            p2y <= 6'd5;
+        end
+    end
+    
 endmodule
