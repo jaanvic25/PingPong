@@ -42,8 +42,8 @@ module led(
     assign nums[7] = seven;
 
     function loop(input num); // automatic??
-        ctr = 0;
         begin
+        ctr = 0;
             for(integer row = 0; row < 15; row = row + 3) begin
                     matrix[sc1x][ctr] <= num[row];
                     matrix[sc1x+1][ctr] <= num[row+1];
