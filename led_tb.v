@@ -1,4 +1,6 @@
-module ledmatrix_tb (
+`timescale 1ns/1ns
+
+module led_tb;
     // Inputs
     reg [5:0] bx;
     reg [5:0] by;
@@ -10,7 +12,7 @@ module ledmatrix_tb (
     // Outputs
     wire [63:0] matrix [0:63];
 
-    ledmatrix uut (
+    led uut (
         .bx(bx),
         .by(by),
         .p1y(p1y),
@@ -33,6 +35,4 @@ module ledmatrix_tb (
         $display("\n LED matrix testbench complete."); #0.5
         $stop;
     end
-);
-
 endmodule
