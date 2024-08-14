@@ -23,19 +23,18 @@ module led(
     localparam sc2x = 46; // 46-48;
     //localparam index = 0;
     //localparam bx_temp = bx;
-    reg ctr = 0;
+    reg [2:0] ctr = 0;
 
     reg [120:0] nums;
 
     // Set everything to 0 and set up nums 
     initial begin
-        matrix_row = 0;
         nums[14:0] = 15'b111101101101111; // 0
         nums[30:15] = 15'b010010010010010; // 1
-        nums[45:30] = 15'b111001111100111; // 2
+        nums[45:30] =  15'b111100111001111; // 2
         nums[60:45] = 15'b111001111001111; // 3
         nums[75:60] = 15'b101101111001001; // 4
-        nums[90:75] = 15'b111100111001111; // 5
+        nums[90:75] =  15'b111001111100111; // 5
         nums[105:90] = 15'b111100111101111; // 6
         nums[120:105] = 15'b111001001001001; // 7
          
@@ -44,38 +43,46 @@ module led(
         end
     end
 
-    task loop(input n); // automatic??
+    task loop(input x, input [15:0] n); // automatic??
         begin
+            $display("in loop ");
             //n is the index start
             ctr = 0;
             for(integer row = 0; row < 15; row = row + 3) begin
+                $display("score 1 = %d, col = %d, n = %d ", sc2x, ctr, n);
+                ctr = ctr + 1;
+                if(x == 0) begin
                     matrix[sc1x][ctr] <= nums[n+row];
                     matrix[sc1x+1][ctr] <= nums[n+row+1];
                     matrix[sc1x+2][ctr] <= nums[n+row+2];
-                    ctr <= ctr + 1;
+                end
+                else begin
+                    matrix[sc2x][ctr] <= nums[n+row];
+                    matrix[sc2x+1][ctr] <= nums[n+row+1];
+                    matrix[sc2x+2][ctr] <= nums[n+row+2];
+                end 
+                
             end
         end
     endtask
-    
     // Display ball 
     always @(bx or by) begin  
-        //matrix_row[63:0] <= matrix[bx];
-        $display("hi");
-        for (int i = 0; i < by+1; i = i+1) begin
-            if (i == by)
-                matrix_row[i] = 1;
-            else
-                matrix_row[i] = 0;
-        end
+        matrix_row = 64'b0;
+        matrix_row[by] = 1;
+        matrix[bx] <= matrix_row;
         $display("%b", matrix_row);
-        matrix[bx] <= matrix_row;    
     end
 
-    always @(*) begin
+    always @(sc1) begin
         // Display the score
-        loop(sc1*15);
-        loop(sc2*15);
-    
+        $display("sc1 = %d, sc1*n = %d", sc1, (sc1*15));
+        loop(0, sc1*15);
+    end
+    always @(sc2) begin
+        // Display the score
+        loop(1, sc2*15);
+    end
+    always @(*) begin
         // Display the middle line
         for(integer i=0; i<64; i=i+3) begin
             matrix[midpt][i] <= 1;

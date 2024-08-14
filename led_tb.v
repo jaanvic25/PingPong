@@ -28,8 +28,8 @@ module led_tb;
         by = 6'd20; #5
         p1y = 20; #5
         p2y = 20; #5
-        sc1 = 1; #5
-        sc2 = 1; #5
+        sc1 = 5; #5
+        sc2 = 3; #5
 
         $display("Test 1: score 1 = %b, score 2 = %b", sc1, sc2);
         for(integer i = 0; i <64; i=i+1) begin
