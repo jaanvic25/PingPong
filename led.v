@@ -21,6 +21,7 @@ module led(
     localparam scy = 1;
     localparam sc1x = 14; //14-16
     localparam sc2x = 46; // 46-48;
+    //localparam index = 0;
     //localparam bx_temp = bx;
     reg ctr = 0;
 
@@ -28,6 +29,7 @@ module led(
 
     // Set everything to 0 and set up nums 
     initial begin
+        matrix_row = 0;
         nums[14:0] = 15'b111101101101111; // 0
         nums[30:15] = 15'b010010010010010; // 1
         nums[45:30] = 15'b111001111100111; // 2
@@ -55,11 +57,18 @@ module led(
         end
     endtask
     
-    // Display ball f
-    always @(bx or by) begin 
-        //matrix_row[by] <= 1;
-        //matrix[bx] <= matrix_row;
-        //matrix[20][20] <= 1;
+    // Display ball 
+    always @(bx or by) begin  
+        //matrix_row[63:0] <= matrix[bx];
+        $display("hi");
+        for (int i = 0; i < by+1; i = i+1) begin
+            if (i == by)
+                matrix_row[i] = 1;
+            else
+                matrix_row[i] = 0;
+        end
+        $display("%b", matrix_row);
+        matrix[bx] <= matrix_row;    
     end
 
     always @(*) begin
@@ -73,10 +82,7 @@ module led(
             matrix[midpt][i+1] <= 1;
             matrix[midpt][i+2] <= 0;
         end
-    end
-    
-    // Display paddles
-    always @(p1y or p2y) begin
+
         for(integer i =0; i<6; i = i+1) begin
             matrix[p1x][p1y+i] <= 1;
             matrix[p1x+1][p1y+i] <= 1;
@@ -84,4 +90,9 @@ module led(
             matrix[p2x+1][p2y+i] <= 1;
         end
     end
+    
+    // // Display paddles
+    // always @(p1y or p2y) begin
+        
+    // end
 endmodule

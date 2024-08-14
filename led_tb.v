@@ -8,7 +8,7 @@ module led_tb;
     reg [5:0] p2y;
     reg [2:0] sc1;
     reg [2:0] sc2;
-    
+
     // Outputs
     wire [63:0][0:63] matrix ;
 
@@ -24,14 +24,14 @@ module led_tb;
 
     initial begin
         // Test 1
-        bx = 20;
-        by = 20; #5
+        bx = 6'd20;
+        by = 6'd20; #5
         p1y = 20; #5
         p2y = 20; #5
-        sc1 = 2; #5
+        sc1 = 1; #5
         sc2 = 1; #5
 
-        $display("Test 1!, score 1: %b, score 2: %b", sc1, sc2);
+        $display("Test 1: score 1 = %b, score 2 = %b", sc1, sc2);
         for(integer i = 0; i <64; i=i+1) begin
             $display("%b", matrix[i]);
         end
