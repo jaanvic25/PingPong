@@ -1,6 +1,7 @@
 module top (
     input sys_clock, reset, start,
-    output reset_game, sc1, sc2, start_o, clk, counter
+    output reset_game, sc1, sc2, clk, 
+    output reg [359:0] counter
 );
 
 //remember: you can change clock speed whenever u want
@@ -24,13 +25,14 @@ module top (
 
     // If start button is pressed, display opening screen in LED matrix
     always @(posedge clk && start) begin
-        start_o <= 1;
+        reset_game <=0;
     end
 
     // If there is a winner
     always @(sc1 == 7 || sc2 == 7) begin
-        if (reset) begin
-        end
+        // if (reset) begin
+        // end
+        reset_game <= 1;
     end
 
 endmodule
