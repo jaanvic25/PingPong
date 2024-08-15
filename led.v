@@ -4,11 +4,8 @@ led
 module led(
 
     // Inputs
-
     input [5:0] bx,
-
     input [5:0] by,
-
     input [5:0] p1y,
 
     input [5:0] p2y,
