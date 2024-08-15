@@ -7,29 +7,18 @@ module led(
     input [5:0] bx,
     input [5:0] by,
     input [5:0] p1y,
-
     input [5:0] p2y,
-
     input [2:0] sc1,
-
     input [2:0] sc2,
  
     // Outputs
-
     output reg [63:0] matrix [0:63] 
-
 );
-
     localparam midpt = 30; //30-31
-
     localparam p1x = 0; 
-
     localparam p2x = 62;
-
     localparam scy = 1;
-
     localparam sc1x = 14; //14-16
-
     localparam sc2x = 46; // 46-48;
 
     //localparam index = 0;
@@ -37,9 +26,7 @@ module led(
     //localparam bx_temp = bx;
 
     reg [2:0] ctr = 0;
-
     reg [63:0] matrix_row;
- 
     reg [120:0] nums;
  
     // Set everything to 0 and set up nums 
